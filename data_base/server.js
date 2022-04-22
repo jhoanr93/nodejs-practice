@@ -1,12 +1,16 @@
 const express = require('express');
 const sqlite3 = require('sqlite3');
 const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-let db = new sqlite3.Database('backend-project');
+const sequalize = new Sequelize('backend-project', null, null,{
+    dialect: 'sqlite',
+    storage: './backend-project'
+});
 
 //db.run('CREATE TABLE tasks(id int AUTO_INCREMENT, description varchar(255))');
 app.post('/pendientes', function(req, res){
